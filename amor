@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Te Amo ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom, #ffe0f0, #ffccdd);
+      overflow: hidden;
+      color: #fff;
+      text-align: center;
+    }
+
+    iframe.spotify {
+      margin-top: 20px;
+      border-radius: 12px;
+    }
+
+    .slideshow {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
+    }
+
+    .slideshow img {
+      position: absolute;
+      width: auto;
+      max-width: 90%;
+      max-height: 100%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      transition: opacity 1s ease-in-out, transform 10s ease-in-out;
+      opacity: 0;
+    }
+
+    .slideshow img.active {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+
+    .timer {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      color: #ff0055;
+      font-weight: bold;
+    }
+
+    .message {
+      margin: 30px auto;
+      padding: 0 20px;
+      font-size: 1.2rem;
+      max-width: 600px;
+      color: #333;
+    }
+
+    /* Corações */
+    .heart {
+      position: fixed;
+      top: -50px;
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      transform: rotate(45deg);
+      animation: fall linear infinite;
+      opacity: 0.7;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      top: 0;
+      left: -10px;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-50px) rotate(45deg);
+      }
+      100% {
+        transform: translateY(100vh) rotate(45deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Player do Spotify -->
+  <iframe class="spotify" style="border-radius:12px" src="https://open.spotify.com/embed/track/21IYMdzTrzSe191Cy5eMap?utm_source=generator" width="90%" height="80" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+  <!-- Slideshow de fotos -->
+  <div class="slideshow">
+    <img src="Foto 1.jpg" class="active" />
+    <img src="Foto 2.jpg" />
+    <img src="Foto 3.jpg" />
+    <img src="Foto 4.jpg" />
+    <img src="Foto 5 .jpg" />
+    <img src="Foto 6.jpg" />
+    <img src="Foto 7.jpg" />
+    <img src="Foto 8.jpg" />
+    <img src="Foto 9.jpg" />
+  </div>
+
+  <!-- Contador -->
+  <div class="timer" id="timer"></div>
+
+  <!-- Texto bonito -->
+  <div class="message">
+    Mas um mês chegou, e contra todas as variáveis nos mantivemos juntos, apoiando, ajudando, incentivando e acreditando um ao outro, nos bons e maus momentos, e o amor nada mais é do que isso. A cada dia hora minuto e segundo que passa, eu me apaixono ainda mais por você, temos um futuro lindo, próspero e brilhante pela frente, e ele só existe graças as nossas vontades de fazer dar certo, espero que isso nunca acabe. Eu te amo.
+  </div>
+
+  <!-- Script -->
+  <script>
+    const startDate = new Date("2024-10-16T18:00:00").getTime();
+    const timer = document.getElementById("timer");
+
+    function updateTimer() {
+      const now = new Date().getTime();
+      const diff = now - startDate;
+
+      const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
+      const weeks = Math.floor((diff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24 * 7));
+      const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      timer.innerHTML = `❤️ Eu te amo há: ${months} meses, ${weeks} semanas, ${days} dias, ${hours} horas, ${minutes} minutos e ${seconds} segundos ❤️`;
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    // Slideshow
+    const slides = document.querySelectorAll(".slideshow img");
+    let current = 0;
+    setInterval(() => {
+      slides[current].classList.remove("active");
+      current = (current + 1) % slides.length;
+      slides[current].classList.add("active");
+    }, 3000);
+
+    // Corações caindo
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 2 + Math.random() * 3 + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+    setInterval(createHeart, 300);
+  </script>
+</body>
+</html>
